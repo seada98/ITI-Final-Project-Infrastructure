@@ -35,7 +35,7 @@ spec:
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
-        restartPolicy: OnFailure
+      restartPolicy: OnFailure
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:
