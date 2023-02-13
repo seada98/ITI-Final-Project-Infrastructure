@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "iti-seada",
+  "private_key_id": "d36f644d14c9a781ced9d23378e0623d37bed913",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwa4OMaYA4ulq0\nbUk2BNttIHdmpJxsROpmczyk7bIB3FpOqI6ezi0lO6lCfTi1ohJaqD9JeO68xAXK\nH69qiseCcDCiHwg5HpKl+cdVv2FfsGLW51C4wZnm24pCXmS1YYLH4OZBXJUpeYYa\ntNWMF+TJvZP1ENBx7ByKpRaQAu1wazIvqQTAYPgRTlNADozRTH4HkP3rxfvID9aQ\nkL1FuDzD2Y3Mxscq6rEWVZDYCnHG8rWw7FhiXEAlzp78p/uf14F7bbV3GlMjDhRT\nm/KmBzX1on/NfiHm2/xpAm5F9/1xB5VhdgIOiFlwR8X/CbobfSNqDBXrdSfBkKTT\n7XbYBz6zAgMBAAECggEABzZotbrdH8nun2XAZ9Ghrup0Nza6S8Ay3RFlBKZ7GpG0\nV3borca8GG5B/efkrk2moRzedCsvh3l0IHlUe0SajNNNXwi/FfwRVBvMHHirNcrz\nn4RBdpbjqzPaiTAWv0ZHSdNWATdpxGelez4ID6bXwa+wdtptyy/d/YUWUQ5C6s+b\nAv6viD+MVDhg/PJF+DSYEHft3nFPONqG/n+oL1m+nzoZ7Hw7L/7o7QM+53k23igD\n7Ogr7vSzXNq5HWlrNvoqU+vfrOX4C9Gehdhm2wdOAUZKJmA6CG1aK+ym2UOhjoP7\nqNlU2Fj2XuudwN4Be719vRxKk8x4NEXTS4E71Pn5QQKBgQDnb4TVgBcm+PbUsTHO\nP9HT2covZviQpFjxYlmTTwz1DZow/SZTkHcKK2y+1bix93qCu2SX32z8JnBhuNVI\nwqbzGOB9ADR1IO5Q2pQGME9TOSuBUuAbef2DWpqXxuBf2EiFDwFQ4OdiPQ5shAf6\n0hoDayNpU+uoj+khcwfAJVjjUQKBgQDDJSF1e96fXpia53joHfEdwHjvq2r5bItn\niOwQIi5fQDXz6LVwdeFQjSFkQNvgWzN2Mv0xh8dcTwugbc/2qfjzdupifqOotrz/\n+QnEgySlVxgTf83zQOmwq2ei+SeGdeJV3ShpbAHH4lRbSBJnBrrzKLEITsIfo/0J\nVaLUvjqYwwKBgFHub+cpZojcgH2BkXFDtKO8KVCosnx6QiaKO83joWGrhBettwDE\nVvAZuXDBtpYCV7OqZY1CgpGthgGCbrdIedP7zZVTGj8Q/m1PRDIArkR3K8inr0Dq\n6e2ziKEMvegQaHP6gOvCAwgLN20BPNX1xVHKfwnNtNLCx7SYxXingBVRAoGBAKMU\nNJHponGsq/tH1VKlMwqZ/nbL2en3O8iaNCyHZBlVn8DliDsjR9f5GR6e1SD5FliA\n4/awcXpC1ISNQG3yPYm4pscI7dvgWrHPfMosjkNeNVCWTZYreR+bHlCjxtQnT65R\n06PGDvbrvXNLF5Xhmfn613cJ2lB2ys8yMZF4J5/hAoGAaeqdgYlz0rJDO2/mt4rr\njsiP85BJgM4AAN09oxejlsO0TUyyKArVRR5t5YcvJ3i/LLG2xCwGHMruN7HYWx8M\n28Kemve9NILYV0RIT1VMzpaqF7Pp5Vd1y3RpJtGZu1IC+RQ9CuZPVn8/JJYwMUvF\nyAsMciUWqlSrMYe8IlSle84=\n-----END PRIVATE KEY-----\n",
+  "client_email": "seada-sa@iti-seada.iam.gserviceaccount.com",
+  "client_id": "116780580839275612978",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/seada-sa%40iti-seada.iam.gserviceaccount.com"
+}
