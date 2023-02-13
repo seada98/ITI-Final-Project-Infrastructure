@@ -5,7 +5,7 @@ resource "google_container_cluster" "my-private-cluster" {
   remove_default_node_pool = true
   initial_node_count       = 1
   network                  = google_compute_network.seada-vpc.id
-  subnetwork               = google_compute_subnetwork.restricted_subnet.id
+  subnetwork               = google_compute_subnetwork.management_subnet.id
   
   master_authorized_networks_config {
     cidr_blocks {
@@ -60,7 +60,7 @@ resource "google_container_node_pool" "nodepool" {
 
   node_config {
     preemptible  = true
-    machine_type = "e2-micro"
+    machine_type = "e2-medium"
     service_account = google_service_account.project-service-account.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"

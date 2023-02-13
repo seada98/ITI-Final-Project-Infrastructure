@@ -1,6 +1,6 @@
 resource "google_compute_instance" "private-vm" {
   name         = "private-vm"
-  machine_type = "e2-micro"
+  machine_type = "e2-medium"
   zone         = "us-central1-c"
 
   depends_on = [
@@ -8,7 +8,7 @@ resource "google_compute_instance" "private-vm" {
    , google_container_node_pool.nodepool
   ]
   
-  #metadata_startup_script = "${file("./script.sh")}"
+  metadata_startup_script = "${file("./script.sh")}"
 
   service_account {
     email = google_service_account.project-service-account.email
