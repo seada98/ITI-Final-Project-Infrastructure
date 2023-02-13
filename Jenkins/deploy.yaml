@@ -21,13 +21,16 @@ spec:
             containerPort: 50000
         volumeMounts:
           - name: jenkins-home
-            mountPath: /var/jenkins-home
+            mountPath: /var/jenkins_home
     volumes:
     - name: jenkins-home
-      emptyDir: {}
+      persistentVolumeClaim:
+          claimName: jenkins-pvc
 
  replicas: 1
  selector:
    matchLabels:
      app: jenkins
+
+
 
