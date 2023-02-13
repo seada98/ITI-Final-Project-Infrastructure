@@ -23,11 +23,11 @@ spec:
         volumeMounts:
           - name: jenkins-home
             mountPath: /var/jenkins_home
-    # restartPolicy: Always
+    restartPolicy: Always
     volumes:
     - name: jenkins-home
       persistentVolumeClaim:
-          claimName: jenkins-pvc
+          claimName: jenkins-p
  replicas: 1
  selector:
    matchLabels:
@@ -36,7 +36,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: jenkins-pvc
+  name: jenkins-p
   namespace: jenkins
 spec:
   accessModes:
