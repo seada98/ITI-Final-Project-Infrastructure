@@ -1,70 +1,3 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: jenkins-service
-  namespace: jenkins
-spec:
-  type: LoadBalancer
-  selector:
-    app: jenkins
-  ports:
-  - name: http
-    port: 8080
-    targetPort: 8080
-  - name: jnlp
-    port: 50000
-    targetPort: 50000
-
----
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: jenkins-storage
-provisioner: kubernetes.io/gce-pd
-parameters:
-  type: pd-ssd
-  replication-type: none
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: jenkins-pv-volume
-spec:
-  storageClassName: jenkins-storage
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  gcePersistentDisk:
-    pdName: jenkins-pv-disk
-    fsType: ext4
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cloud.google.com/gke-nodepool
-          operator: In
-          values:
-          - gke-nodepool
-
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jenkins-pv-claim
-  namespace: jenkins
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: jenkins-storage
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -74,22 +7,81 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jenkins
+      app: jenkins-server
   template:
     metadata:
       labels:
-        app: jenkins
+        app: jenkins-server
     spec:
       containers:
-      - name: jenkins
-        image: jenkins/jenkins:2.303.2-jdk11
-        ports:
-        - containerPort: 8080
-        - containerPort: 50000
-        volumeMounts:
-        - name: jenkins-pv-storage
-          mountPath: /var/jenkins_home
+        - name: jenkins
+          image: shassem/jenkinsgcp
+          ports:
+            - name: httpport
+              containerPort: 8080
+            - name: jnlpport
+              containerPort: 50000
+
+          volumeMounts:
+            - name: jenkins-data
+              mountPath: /var/jenkins_home
+
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+            
+            - name: docker
+              mountPath: /usr/bin/docker
+              subPath: docker
+
+            - name: kubernetes
+              mountPath: /usr/bin/kubectl
+              subPath: kubectl
+
+      
+      initContainers:
+        - name: init-docker
+          image: docker
+          command: ["cp","/usr/local/bin/docker", "/opt/tmp"]
+       
+            
+          volumeMounts:  
+            - name: docker
+              mountPath: /opt/tmp
+
+        - name: init-k8s
+          image: alpine/k8s:1.23.13
+          command: ["cp","/usr/bin/kubectl","/opt/temp"]
+
+          volumeMounts:
+            - name: kubernetes
+              mountPath: "/opt/temp"
+
+        
       volumes:
-      - name: jenkins-pv-storage
-        persistentVolumeClaim:
-          claimName: jenkins-pv-claim
+        - name: jenkins-data
+          emptyDir: {}
+
+        - name: docker
+          emptyDir: {}
+        
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
+
+        - name: kubernetes
+          emptyDir: {}
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+  namespace: jenkins
+spec:
+  type: LoadBalancer
+  selector:
+    app: jenkins-server
+  ports:
+      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: 8080
+      targetPort: 8080  
