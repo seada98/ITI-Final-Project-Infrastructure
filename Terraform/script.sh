@@ -23,5 +23,5 @@ sudo apt update -y
 sudo apt-get install docker-ce -y
 sudo systemctl start docker
 sudo systemctl enable docker
-~                            
+                    
 
