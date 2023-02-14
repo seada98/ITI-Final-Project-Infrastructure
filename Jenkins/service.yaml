@@ -3,12 +3,15 @@ kind: Service
 metadata:
   name: jenkins-service
   namespace: jenkins
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path:   /
+      prometheus.io/port:   '8080'
 spec:
-  type: LoadBalancer
+  selector: 
+    app: jenkins-server
+  type: NodePort  
   ports:
-    - protocol: TCP  
-      port: 8080
+    - port: 8080
       targetPort: 8080
-      name: http
-  selector:
-    app: jenkins-service
+      nodePort: 32000
