@@ -31,15 +31,24 @@ kind: PersistentVolume
 metadata:
   name: jenkins-pv-volume
 spec:
+  storageClassName: jenkins-storage
   capacity:
     storage: 10Gi
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: jenkins-storage
   gcePersistentDisk:
     pdName: jenkins-pv-disk
     fsType: ext4
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: cloud.google.com/gke-nodepool
+          operator: In
+          values:
+          - gke-my-private-cluster-nodepool-aa419e60-v2kx
+
 
 ---
 apiVersion: v1
