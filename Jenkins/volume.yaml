@@ -27,7 +27,7 @@ spec:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: kubernetes.io/hostname
+        - key: cloud.google.com/gke-nodepool
           operator: In
           values:
           - gke-my-private-cluster-nodepool-aa419e60-v2kx
