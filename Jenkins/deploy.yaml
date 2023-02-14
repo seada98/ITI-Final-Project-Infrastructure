@@ -26,36 +26,20 @@ spec:
     restartPolicy: Always
     volumes:
     - name: jenkins-home
-      persistentVolumeClaim:
-          claimName: jenkins-p
+      gcePersistentDisk:
+          pdName: jenkins-disk
+          fsType: ext4
  replicas: 1
  selector:
    matchLabels:
      app: jenkins
 ---
+kind: PersistentDisk
 apiVersion: v1
-kind: PersistentVolumeClaim
 metadata:
-  name: jenkins-p
-  namespace: jenkins
+  name: jenkins-disk
 spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jenkins
-  namespace: jenkins
-spec:
-  type: LoadBalancer
-  ports:
-    - protocol: TCP  
-      port: 8080
-      targetPort: 8080
-      name: http
-  selector:
-    app: jenkins
+  sizeGb: 5
+  type: pd-standard
+  zone: us-central1-a
+
