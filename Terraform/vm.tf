@@ -25,11 +25,6 @@ resource "google_compute_instance" "private-vm" {
   network_interface {
     network = google_compute_network.seada-vpc.id
     subnetwork = google_compute_subnetwork.management_subnet.id
-    access_config {
-      nat_ip = google_compute_address.instance_external_ip.address
-    }
   }
 }
-resource "google_compute_address" "instance_external_ip" {
-  name = "instance-external-ip"
-}
+
