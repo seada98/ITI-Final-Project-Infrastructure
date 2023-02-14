@@ -47,7 +47,7 @@ spec:
         - key: cloud.google.com/gke-nodepool
           operator: In
           values:
-          - gke-my-private-cluster-nodepool-aa419e60-v2kx
+          - gke-nodepool
 
 
 ---
