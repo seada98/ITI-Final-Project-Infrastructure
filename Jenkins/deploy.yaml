@@ -39,38 +39,59 @@ metadata:
   name: jenkins-pvc
   namespace: jenkins
 spec:
+  storageClassName: local-stotage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 5Gi
 ---
 apiVersion: v1
-kind: Service
+kind: PersistentVolume
 metadata:
-  name: jenkins
-  namespace: jenkins
-spec:
-  selector:
-    app: jenkins
-  ports:
-  - name: http
-    port: 8080
-    targetPort: 8080
-  type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jenkins
+  name: jenkins-pv
   namespace: jenkins
   labels:
-    app: jenkins
+    type: local
 spec:
-  selector:
-    app: jenkins
+  storageClassName: local-storage
+  claimRef:
+    name: jenkins-pvc
+    namespace: jenkins
+  capacity:
+    storage: 10Gi
+  accessModes: 
+    - ReadWriteOnce
+  local:
+    path: /var/jenkins_home
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+           - gke-my-private-cluster-nodepool-aa419e60-v2kx
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+  namespace: jenkins
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  type: LoadBalancer
   ports:
-    - name: http
+    - protocol: TCP  
       port: 8080
       targetPort: 8080
-  type: LoadBalancer
+      name: http
+  selector:
+    app: jenkins
