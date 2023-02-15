@@ -64,7 +64,7 @@ terraform apply
   * Create Jenkins namespace
   * Deploying jenkins & loadbalancer servies
 
-## Check Services To Get Url For Jenkins 
+## Check Services To Get URL For Jenkins 
 
 ![](./Screenshot/jenkins-srv.png)
 
