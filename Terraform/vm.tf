@@ -27,4 +27,3 @@ resource "google_compute_instance" "private-vm" {
     subnetwork = google_compute_subnetwork.management_subnet.id
   }
 }
-

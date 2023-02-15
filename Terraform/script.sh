@@ -15,5 +15,3 @@ sudo apt-get install -y ansible
 #Run Ansible Playbook To Connect With cluster And deploy Jenkins With Services
 sudo ansible-playbook /home/mohamed/files/ansible.yaml
 
-                    
-
